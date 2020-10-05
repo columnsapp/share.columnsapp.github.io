@@ -13,24 +13,6 @@
 </head>
 <body>
 
-    <template id="header-component" v-cloak>
-        <header class="pageHeader">
-            <div class="header_logo">
-                <a href="https://columnsapp.com" target="_blank">
-                    <img class="logo" src="../img/columns_word_svg.svg" alt="logo">
-                </a>
-                <p class="logo_text">
-                    <!-- Love taking notes again -->
-                    Make notetaking great again
-                </p>
-            </div>
-            <!-- <div class="viewInColumns">
-                <a>Get Columns</a>
-            </div> -->
-            
-        </header>
-    </template>
-
     <template id="row-component" v-cloak>
         <tr v-if="note.title || note.content">
             <td class="rowTitle titleText">
@@ -48,16 +30,16 @@
         </tr>
     </template>
 
-    <div id='app' v-cloak>
+    <div id='app'>
         
 
         <section class="main" v-if="!loaded">
             <p>
-                loading...
+                getting sheet...
             </p>
         </section>
 
-        <section class="main" v-else-if="notes">
+        <section class="main" v-else-if="notes" v-cloak>
             
             <table>
                 <colgroup>
@@ -90,7 +72,7 @@
             </table>
         </section>
 
-        <section class="main" v-else="!loaded">
+        <section class="main" v-else="!loaded" v-cloak>
             <h2>
                 Sheet not found. 🕵🏾‍♂️
             </h2>
@@ -113,7 +95,21 @@
         
         <footer></footer>
 
-        <header-component ></header-component>
+        <header class="pageHeader">
+            <div class="header_logo">
+                <a href="https://columnsapp.com" target="_blank">
+                    <img class="logo" src="../img/columns_word_svg.svg" alt="logo">
+                </a>
+                <p class="logo_text">
+                    <!-- Love taking notes again -->
+                    Make notetaking great again
+                </p>
+            </div>
+            <!-- <div class="viewInColumns">
+                <a>Get Columns</a>
+            </div> -->
+            
+        </header>
 
     </div>
 
