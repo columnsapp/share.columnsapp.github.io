@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share sheet - Columns</title>
+    <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js' defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" defer></script>
+    <script src='../index-min.js' defer></script>
+    <link href="https://unpkg.com/@csstools/normalize.css" rel="stylesheet" />
+    <link rel="stylesheet" href='../style.css' /> 
+    
+</head>
+<body>
+
+    <template id="header-component" v-cloak>
+        <header class="pageHeader">
+            <div class="header_logo">
+                <a href="https://columnsapp.com" target="_blank">
+                    <img class="logo" src="../img/columns_word_svg.svg" alt="logo">
+                </a>
+                <p class="logo_text">
+                    <!-- Love taking notes again -->
+                    Make notes great again
+                </p>
+            </div>
+            <!-- <div class="viewInColumns">
+                <a>Get Columns</a>
+            </div> -->
+            
+        </header>
+    </template>
+
+    <template id="row-component" v-cloak>
+        <tr v-if="note.title || note.content">
+            <td class="rowTitle titleText">
+                <div>
+                    <p v-html="note.title">
+                        {{note.title}}
+                    </p>
+                </div>
+            </td>
+            <td class="rowContent">
+                <div class="rowContentWrapper" v-html="note.content">
+                    {{note.content}}
+                </div>
+            </td>
+        </tr>
+    </template>
+
+    <div id='app' v-cloak>
+        
+
+        <section class="main" v-if="!loaded">
+            <p>
+                loading...
+            </p>
+        </section>
+
+        <section class="main" v-else-if="notes">
+            
+            <table>
+                <colgroup>
+                    <col style="width: 33%;" />
+                </colgroup>
+
+                <thead>
+                    <tr>
+                        <th th colspan="2">
+                            <h1 v-if="sheet"> {{ sheet.name }}</h1>
+                        </th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    <tr is="row-component" v-for='note in notes' :note="note" /> 
+                    
+                    <tr v-if='summary'>
+                        <td colspan='2'>
+                            <h1>Summary</h1>
+                            <div class="summary">
+                                <p>
+                                    {{ summary }}
+                                </p>
+                            </div>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </section>
+
+        <section class="main" v-else="!loaded">
+            <h2>
+                Sheet not found. 🕵🏾‍♂️
+            </h2>
+            <p>
+                Sure you have the right link? The sheet may have been unpublished.
+            </p>
+        </section>
+        
+        <footer></footer>
+
+        <header-component ></header-component>
+
+    </div>
+
+</body>
+</html>
